@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PushToOpen</string>
+    <string name="setup">APIキーと鍵の設定</string>
+    <string name="apiKey">APIキー</string>
+    <string name="aboutApiKey">APIキーの取得方法は以下のサイトをご確認ください。&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="https://jp.candyhouse.co/blogs/how-to/api%E3%82%AD%E3%83%BC%E5%8F%96%E5%BE%97%E6%96%B9%E6%B3%95%E3%81%A8%E3%82%BB%E3%82%B5%E3%83%9Fid%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95"&gt;APIキー取得方法とセサミIDの確認方法&lt;/a&gt;
+        &lt;br/&gt;
+        取得したAPIキーを下のフォームに貼り付けてください。
+</string>
+    <string name="aboutKey">このアプリで操作する かぎ を選択してください。</string>
+    <string name="key">かぎ</string>
+    <string name="done">完了</string>
+    <string name="next">次へ</string>
+    <string name="keyFormat">%1$s\nSERIAL: %2$s</string>
+    <string name="reload">再読み込み</string>
+    <string name="unlock">あける</string>
+    <string name="lock">しめる</string>
+    <string name="actionErrorFmt">エラーが返されました\n %1$s</string>
+    <string name="apiKeyIsEmpty">APIキーが設定されていません</string>
+    <string name="deviceIdIsEmpty">かぎが選択されていません</string>
+    <string name="tileNotificationCh">タイルからの操作結果</string>
+    <string name="processing">かぎを操作中…</string>
+    <string name="successful">かぎを開けました!!</string>
+
+</resources>
