@@ -15,3 +15,8 @@ APIキーの取得方法は下記のサイトを参照してください。(ち�
 
 - [APIキー取得方法とセサミIDの確認方法](https://jp.candyhouse.co/blogs/how-to/api%E3%82%AD%E3%83%BC%E5%8F%96%E5%BE%97%E6%96%B9%E6%B3%95%E3%81%A8%E3%82%BB%E3%82%B5%E3%83%9Fid%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95)
 
+
+# apk
+
+- https://deploygate.com/distributions/c2a20c3cb5cbf1ff615e1f5bc458900298b4fa0a
+
