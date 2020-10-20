@@ -18,6 +18,14 @@ public class SetLockTask extends SesameTask<ActionResult> {
 
     @Override
     protected ActionResult exec(@NonNull Sesame sesame) throws Exception {
+//        if (BuildConfig.DEBUG) {
+//            Thread.sleep(5000);
+//            JSONObject j = new JSONObject();
+//            j.put("status", ActionResult.STATUS_TERMINATED);
+//            j.put("successful", true);
+//            return new ActionResult(j);
+//        }
+
         String taskId = sesame.setLock(mDeviceId, mLock);
 
         Thread.sleep(1000);
