@@ -8,6 +8,8 @@ import android.service.quicksettings.TileService;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import jp.syoboi.android.pushtoopen.client.sesame.ActionResult;
 import jp.syoboi.android.pushtoopen.task.SesameTask;
 import jp.syoboi.android.pushtoopen.task.SetLockTask;
@@ -44,30 +46,32 @@ public class MyTileService extends TileService {
 
         String device_id = Prefs.get(Prefs.SESAME_DEVICE_ID);
         if (TextUtils.isEmpty(device_id)) {
-            showNotification(getString(R.string.deviceIdIsEmpty));
+            showResultNotification(getString(R.string.deviceIdIsEmpty));
             return;
         }
 
         setTileState(Tile.STATE_ACTIVE);
 
-        showNotification(getString(R.string.processing));
+        showNotification(CH_ACTION_PROCESSING, NID_ACTION_PROCESSING, getString(R.string.processing),
+                android.R.drawable.stat_notify_sync);
         mSetLockTask = new SetLockTask(device_id, false, new SesameTask.Callback<ActionResult>() {
             @Override
             public void onSuccess(ActionResult result) {
                 if (result.successful) {
-                    showNotification(getString(R.string.successful));
+                    showResultNotification(getString(R.string.successful));
                 } else {
-                    showNotification(getString(R.string.actionErrorFmt, result.error));
+                    showResultNotification(getString(R.string.actionErrorFmt, result.error));
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                showNotification(ErrorMessage.getErrorMessage(getApplicationContext(), e));
+                showResultNotification(ErrorMessage.getErrorMessage(getApplicationContext(), e));
             }
 
             @Override
             public void onFinish() {
+                closeNotification(NID_ACTION_PROCESSING);
                 setTileState(Tile.STATE_INACTIVE);
                 mSetLockTask = null;
             }
@@ -75,29 +79,36 @@ public class MyTileService extends TileService {
         mSetLockTask.execute();
     }
 
-    public static final String N_C_ID             = "TileServiceChannel";
-    public static final int    N_ID_ACTION_RESULT = 1;
+    public static final String CH_ACTION_PROCESSING  = "ActionProcessing";
+    public static final String CH_ACTION_RESULT      = "ActionResult";
+    public static final int    NID_ACTION_RESULT     = 1;
+    public static final int    NID_ACTION_PROCESSING = 2;
 
     void createNotificationChannel() {
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        nm.createNotificationChannel(new NotificationChannel(N_C_ID, getString(R.string.tileNotificationCh),
+        nm.createNotificationChannel(new NotificationChannel(CH_ACTION_PROCESSING, getString(R.string.actionProcessingCh),
                 NotificationManager.IMPORTANCE_LOW));
+        nm.createNotificationChannel(new NotificationChannel(CH_ACTION_RESULT, getString(R.string.actionResultCh),
+                NotificationManager.IMPORTANCE_DEFAULT));
     }
 
-    void showNotification(String message) {
+    void showResultNotification(@NonNull String message) {
+        showNotification(CH_ACTION_RESULT, NID_ACTION_RESULT, message, R.drawable.ic_launcher_foreground);
+    }
+
+    void showNotification(@NonNull String ch, int id, String message, int icon) {
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         createNotificationChannel();
 
-        Notification n = new Notification.Builder(this, N_C_ID)
+        Notification.Builder n = new Notification.Builder(this, ch)
                 .setContentTitle(message)
                 .setShowWhen(true)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .build();
-        nm.notify(N_ID_ACTION_RESULT, n);
+                .setSmallIcon(R.drawable.ic_launcher_foreground);
+        nm.notify(id, n.build());
     }
 
-    void closeNotification() {
+    void closeNotification(int id) {
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        nm.cancel(N_ID_ACTION_RESULT);
+        nm.cancel(id);
     }
 }

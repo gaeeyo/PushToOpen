@@ -16,11 +16,12 @@
     <string name="reload">再読み込み</string>
     <string name="unlock">あける</string>
     <string name="lock">しめる</string>
-    <string name="actionErrorFmt">エラーが返されました\n %1$s</string>
+    <string name="actionErrorFmt">🔒 エラーが返されました 😱\n %1$s</string>
     <string name="apiKeyIsEmpty">APIキーが設定されていません</string>
     <string name="deviceIdIsEmpty">かぎが選択されていません</string>
-    <string name="tileNotificationCh">タイルからの操作結果</string>
-    <string name="processing">かぎを操作中…</string>
-    <string name="successful">かぎを開けました!!</string>
+    <string name="actionResultCh">タイルからの操作結果</string>
+    <string name="actionProcessingCh">タイルからの操作結果</string>
+    <string name="processing">🔐 かぎを操作中…</string>
+    <string name="successful">🔓 かぎを開けました!! 😎😎😎😎😎</string>
 
 </resources>
