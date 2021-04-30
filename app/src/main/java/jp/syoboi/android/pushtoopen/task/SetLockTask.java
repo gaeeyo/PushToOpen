@@ -2,6 +2,9 @@ package jp.syoboi.android.pushtoopen.task;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONObject;
+
+import jp.syoboi.android.pushtoopen.BuildConfig;
 import jp.syoboi.android.pushtoopen.client.sesame.ActionResult;
 import jp.syoboi.android.pushtoopen.client.sesame.Sesame;
 
