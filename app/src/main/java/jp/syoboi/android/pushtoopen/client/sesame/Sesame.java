@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.syoboi.android.pushtoopen.App;
 import jp.syoboi.android.pushtoopen.BuildConfig;
 
 public class Sesame {
@@ -58,11 +60,17 @@ public class Sesame {
     private HttpURLConnection openUrlConnection(String url) throws IOException {
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestProperty("Authorization", mApiKey);
+        con.setRequestProperty("User-Agent", App.USER_AGENT);
         return con;
     }
 
     private String getContent(HttpURLConnection con) throws IOException, SesameApiException {
-        InputStream is = con.getInputStream();
+        InputStream is;
+        try {
+            is = con.getInputStream();
+        } catch (FileNotFoundException e) {
+            is = con.getErrorStream();
+        }
         try {
             ByteArrayOutputStream o   = new ByteArrayOutputStream();
             byte[]                buf = new byte[8192];
