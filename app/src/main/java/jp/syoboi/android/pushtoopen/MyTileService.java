@@ -101,9 +101,9 @@ public class MyTileService extends TileService {
         createNotificationChannel();
 
         Notification.Builder n = new Notification.Builder(this, ch)
-                .setContentTitle(message)
-                .setShowWhen(true)
-                .setSmallIcon(R.drawable.ic_launcher_foreground);
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setStyle(new Notification.BigTextStyle().bigText(message))
+                .setShowWhen(true);
         nm.notify(id, n.build());
     }
 
